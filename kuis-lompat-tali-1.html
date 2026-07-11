@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Kuis Lompat Tali Tradisional - SDN-1 Sidorejo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#4FC3E8;
+  --sky-dark:#2FA8D0;
+  --sun:#FFD23F;
+  --coral:#FF6B6B;
+  --grass:#6BCB77;
+  --grape:#7C5CE0;
+  --cream:#FFF9EC;
+  --ink:#3B3355;
+  --white:#FFFFFF;
+  --rope-brown:#B5651D;
+  --shadow: 0 8px 0 rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+html,body{margin:0; padding:0; height:100%;}
+body{
+  font-family:'Nunito', sans-serif;
+  background: linear-gradient(180deg, #EAF8FF 0%, var(--cream) 45%, #FFF3E0 100%);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Baloo 2', cursive; font-weight:800;}
+button{font-family:'Nunito', sans-serif; cursor:pointer; border:none;}
+.screen{display:none; min-height:100vh; padding:18px 16px 40px; position:relative; animation:fadeIn .35s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+.wrap{max-width:760px; margin:0 auto;}
+
+/* ---------- Signature: jump-rope wave divider ---------- */
+.rope-divider{width:100%; height:34px; margin:14px 0;}
+.rope-divider svg{width:100%; height:100%; display:block;}
+.rope-path{
+  stroke:var(--rope-brown);
+  stroke-width:5;
+  stroke-linecap:round;
+  fill:none;
+  stroke-dasharray: 14 10;
+  animation: ropeSwing 1.1s linear infinite;
+}
+@keyframes ropeSwing{ to { stroke-dashoffset:-48; } }
+
+/* ---------- top bar ---------- */
+.topbar{display:flex; align-items:center; justify-content:space-between; max-width:760px; margin:0 auto 6px;}
+.school-badge{display:flex; align-items:center; gap:10px;}
+.school-badge .logo{width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff, var(--sun) 60%, #E8A800 100%); box-shadow:0 3px 0 rgba(0,0,0,.12); display:flex; align-items:center; justify-content:center; font-size:20px;}
+.school-badge .text{line-height:1.15;}
+.school-badge .text b{display:block; font-size:14px; color:var(--ink);}
+.school-badge .text span{font-size:11px; color:#7a7397;}
+
+/* ---------- Hero / mascot ---------- */
+.hero{text-align:center; padding:8px 0 4px;}
+.hero h1{font-size:clamp(24px,6vw,38px); color:var(--grape); margin:6px 0 2px; line-height:1.15;}
+.hero .sub{font-size:16px; color:#6a6285; margin:0 0 10px; font-weight:700;}
+.hero .tagline{
+  display:inline-block; background:var(--white); border:3px dashed var(--sun);
+  border-radius:22px; padding:8px 18px; font-weight:800; color:var(--coral); font-size:15px;
+  box-shadow:var(--shadow);
+}
+
+.mascot-stage{position:relative; height:220px; display:flex; align-items:flex-end; justify-content:center; margin:14px 0 4px;}
+.mascot{position:relative; width:120px; animation: jump 1.15s ease-in-out infinite;}
+@keyframes jump{
+  0%,100%{ transform: translateY(0) rotate(-2deg); }
+  35%{ transform: translateY(-46px) rotate(3deg); }
+  55%{ transform: translateY(-46px) rotate(3deg); }
+  80%{ transform: translateY(0) rotate(-2deg); }
+}
+.mascot .head{
+  width:56px; height:56px; border-radius:50%; margin:0 auto;
+  background: radial-gradient(circle at 34% 30%, #FFE3C4, #F4B183 65%, #D98F52 100%);
+  box-shadow: inset -6px -8px 10px rgba(0,0,0,.12), 0 4px 0 rgba(0,0,0,.08);
+  position:relative;
+}
+.mascot .head:before, .mascot .head:after{ /* eyes */
+  content:''; position:absolute; top:24px; width:6px; height:8px; border-radius:50%; background:var(--ink);
+}
+.mascot .head:before{left:16px;}
+.mascot .head:after{left:34px;}
+.mascot .hair{position:absolute; top:-8px; left:6px; width:44px; height:26px; background:#4A3320; border-radius:50% 50% 0 0; }
+.mascot .body{
+  width:64px; height:70px; margin:-6px auto 0; border-radius:34px 34px 26px 26px;
+  background:linear-gradient(160deg, var(--sky), var(--sky-dark));
+  box-shadow: inset -8px -8px 12px rgba(0,0,0,.15), 0 5px 0 rgba(0,0,0,.08);
+  position:relative;
+}
+.mascot .arm{position:absolute; width:14px; height:44px; background:linear-gradient(160deg,#FFE3C4,#F4B183); border-radius:10px; top:-2px;}
+.mascot .arm.left{left:-10px; transform:rotate(24deg);}
+.mascot .arm.right{right:-10px; transform:rotate(-24deg);}
+.mascot .leg{position:absolute; bottom:-30px; width:16px; height:34px; background:#3B3355; border-radius:8px;}
+.mascot .leg.left{left:10px;}
+.mascot .leg.right{right:10px;}
+.rope-arc{position:absolute; bottom:6px; left:50%; transform:translateX(-50%); width:170px; height:170px; pointer-events:none;}
+.rope-arc svg{width:100%; height:100%;}
+.rope-arc path{stroke:var(--rope-brown); stroke-width:5; fill:none; stroke-linecap:round;}
+
+/* ---------- cards / buttons ---------- */
+.card{background:var(--white); border-radius:24px; padding:20px; box-shadow:var(--shadow); margin-bottom:16px;}
+.btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; padding:15px 18px; border-radius:18px; font-weight:800; font-size:16px;
+  color:var(--white); box-shadow:0 5px 0 rgba(0,0,0,.15); transition:transform .08s ease;
+}
+.btn:active{transform:translateY(3px); box-shadow:0 2px 0 rgba(0,0,0,.15);}
+.btn.primary{background:linear-gradient(160deg,#8471FF,var(--grape));}
+.btn.sun{background:linear-gradient(160deg,#FFDD6B,#F5B700); color:#5A4200;}
+.btn.coral{background:linear-gradient(160deg,#FF8A8A,var(--coral));}
+.btn.grass{background:linear-gradient(160deg,#8CE097,var(--grass));}
+.btn.sky{background:linear-gradient(160deg,#7FDBF7,var(--sky-dark));}
+.btn.ghost{background:var(--white); color:var(--grape); border:2px solid #E4DEFB; box-shadow:none;}
+.btn.small{padding:9px 14px; font-size:13px; border-radius:12px; box-shadow:0 3px 0 rgba(0,0,0,.15); width:auto;}
+.btn:disabled{opacity:.5; pointer-events:none;}
+.menu-grid{display:grid; gap:12px; margin-top:8px;}
+
+input[type=text], input[type=password], input[type=number], select{
+  width:100%; padding:13px 14px; border-radius:14px; border:2px solid #E4DEFB; font-size:15px;
+  font-family:'Nunito',sans-serif; background:#FBFAFF; color:var(--ink);
+}
+input:focus, select:focus{outline:3px solid #C9BEFF; border-color:var(--grape);}
+label{font-weight:800; font-size:13px; color:#6a6285; display:block; margin:12px 0 6px;}
+
+/* ---------- quiz ---------- */
+.quiz-top{display:flex; align-items:center; gap:12px; justify-content:space-between; margin-bottom:6px;}
+.pill{background:var(--white); border-radius:100px; padding:8px 14px; font-weight:800; font-size:13px; box-shadow:var(--shadow); display:flex; align-items:center; gap:6px;}
+.timer-pill{background:var(--sun);}
+.timer-pill.low{background:var(--coral); color:#fff; animation:pulse .6s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.progress-track{height:14px; border-radius:20px; background:#EFE9FF; overflow:hidden; margin:10px 0 4px; border:2px solid #E4DEFB;}
+.progress-fill{height:100%; border-radius:20px; background:linear-gradient(90deg,var(--sky),var(--grape)); transition:width .4s ease;}
+.type-tag{display:inline-block; font-size:11px; font-weight:800; padding:5px 12px; border-radius:100px; color:#fff; margin-bottom:10px;}
+.type-tag.mc{background:var(--sky-dark);}
+.type-tag.tf{background:var(--coral);}
+.type-tag.match{background:var(--grape);}
+.type-tag.order{background:var(--grass);}
+.q-text{font-size:19px; font-weight:800; color:var(--ink); line-height:1.4; margin:2px 0 16px;}
+.speak-btn{display:inline-flex; align-items:center; gap:6px; background:#EFE9FF; color:var(--grape); border-radius:100px; padding:7px 14px; font-weight:800; font-size:12px; margin-bottom:8px;}
+.opt-list{display:grid; gap:10px;}
+.opt{
+  text-align:left; background:#FBFAFF; border:3px solid #E4DEFB; border-radius:16px; padding:14px 16px;
+  font-weight:700; font-size:15px; color:var(--ink); display:flex; align-items:center; gap:10px;
+}
+.opt .bullet{width:26px; height:26px; border-radius:50%; background:#E4DEFB; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex:none;}
+.opt.selected{border-color:var(--grape); background:#F1ECFF;}
+.opt.correct{border-color:var(--grass); background:#E9FBEA;}
+.opt.wrong{border-color:var(--coral); background:#FFEDED;}
+.opt:disabled{pointer-events:none;}
+.tf-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.tf-row .opt{justify-content:center; font-size:17px; padding:20px;}
+
+.match-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.match-col h4{margin:0 0 8px; font-size:12px; color:#8a83a8; text-transform:uppercase; letter-spacing:.5px;}
+.match-item{background:#FBFAFF; border:3px solid #E4DEFB; border-radius:14px; padding:11px 10px; font-weight:700; font-size:13px; margin-bottom:8px; text-align:center; min-height:20px;}
+.match-item.active{border-color:var(--sun); background:#FFF7DD;}
+.match-item.paired{border-color:var(--grass); background:#E9FBEA;}
+.match-item.wrongpair{border-color:var(--coral); background:#FFEDED;}
+
+.order-list{display:grid; gap:10px;}
+.order-item{display:flex; align-items:center; gap:10px; background:#FBFAFF; border:3px solid #E4DEFB; border-radius:14px; padding:11px 12px;}
+.order-item .num{width:26px; height:26px; border-radius:50%; background:var(--grape); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; flex:none;}
+.order-item .txt{flex:1; font-weight:700; font-size:14px;}
+.order-item .arrows{display:flex; gap:4px;}
+.order-item .arrows button{width:30px; height:30px; border-radius:8px; background:#EFE9FF; color:var(--grape); font-weight:800;}
+
+.feedback-banner{position:fixed; left:0; right:0; bottom:0; padding:16px; text-align:center; font-weight:800; font-size:16px; color:#fff; transform:translateY(110%); transition:transform .25s ease; z-index:20;}
+.feedback-banner.show{transform:translateY(0);}
+.feedback-banner.ok{background:var(--grass);}
+.feedback-banner.bad{background:var(--coral);}
+
+/* ---------- result / ranking ---------- */
+.score-circle{width:150px; height:150px; border-radius:50%; margin:10px auto 6px; display:flex; align-items:center; justify-content:center; flex-direction:column; background:conic-gradient(var(--grape) calc(var(--pct)*1%), #EFE9FF 0); position:relative;}
+.score-circle .inner{width:120px; height:120px; border-radius:50%; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:var(--shadow);}
+.score-circle .inner b{font-size:32px; color:var(--grape);}
+.score-circle .inner span{font-size:11px; color:#8a83a8; font-weight:800;}
+.rank-row{display:flex; align-items:center; gap:12px; background:var(--white); border-radius:16px; padding:12px 14px; margin-bottom:10px; box-shadow:var(--shadow);}
+.rank-row .medal{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; flex:none; font-size:14px;}
+.rank-row .name{font-weight:800; flex:1;}
+.rank-row .score{font-weight:800; color:var(--grape);}
+.rank-row .sub{font-size:11px; color:#9a92b5; font-weight:700;}
+
+/* ---------- admin ---------- */
+.admin-q{background:var(--white); border-radius:16px; padding:14px; margin-bottom:10px; box-shadow:var(--shadow);}
+.admin-q .top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+.admin-q .actions{display:flex; gap:6px; flex:none;}
+.icon-btn{width:34px; height:34px; border-radius:10px; background:#EFE9FF; color:var(--grape); font-weight:800;}
+.icon-btn.danger{background:#FFE3E3; color:var(--coral);}
+.toggle-row{display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid #F0ECFF;}
+.switch{width:48px; height:26px; border-radius:100px; background:#E4DEFB; position:relative; flex:none;}
+.switch.on{background:var(--grass);}
+.switch .knob{position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff; transition:left .2s ease; box-shadow:0 1px 2px rgba(0,0,0,.3);}
+.switch.on .knob{left:25px;}
+.modal-bg{position:fixed; inset:0; background:rgba(59,51,85,.55); display:none; align-items:center; justify-content:center; z-index:50; padding:16px;}
+.modal-bg.show{display:flex;}
+.modal{background:#fff; border-radius:22px; padding:20px; max-width:480px; width:100%; max-height:88vh; overflow:auto;}
+.opt-edit-row{display:flex; gap:8px; align-items:center; margin-bottom:8px;}
+.opt-edit-row input[type=text]{flex:1;}
+.back-link{display:inline-flex; align-items:center; gap:6px; font-weight:800; color:var(--grape); margin-bottom:10px; background:none;}
+.tab-row{display:flex; gap:8px; margin-bottom:14px;}
+.tab-btn{flex:1; padding:10px; border-radius:14px; background:#EFE9FF; color:var(--grape); font-weight:800; font-size:13px;}
+.tab-btn.active{background:var(--grape); color:#fff;}
+.hint{font-size:12px; color:#8a83a8; margin-top:6px; line-height:1.5;}
+footer.credit{text-align:center; font-size:11px; color:#a89fc4; margin-top:24px; font-weight:700;}
+@media(min-width:600px){ .menu-grid{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<section id="screen-home" class="screen active">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="school-badge">
+        <div class="logo">🏫</div>
+        <div class="text"><b>SD Negeri-1 Sidorejo</b><span>Pangkalan Bun</span></div>
+      </div>
+      <button class="btn small ghost" onclick="showScreen('screen-ranking'); renderRanking();">🏆 Ranking</button>
+    </div>
+
+    <div class="hero">
+      <div class="mascot-stage">
+        <div class="rope-arc"><svg viewBox="0 0 170 170"><path d="M10,150 C10,40 160,40 160,150"/></svg></div>
+        <div class="mascot">
+          <div class="hair"></div>
+          <div class="head"></div>
+          <div class="body">
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+          </div>
+        </div>
+      </div>
+      <h1>Kuis Lompat Tali<br>Tradisional</h1>
+      <p class="sub">Materi Kelas 3 SD</p>
+      <div class="tagline">✨ Belajar Bersama Asyik Bersama Pak Surya ✨</div>
+    </div>
+
+    <div class="rope-divider"><svg viewBox="0 0 400 34" preserveAspectRatio="none"><path class="rope-path" d="M0,17 Q50,0 100,17 T200,17 T300,17 T400,17"/></svg></div>
+
+    <div class="menu-grid">
+      <button class="btn coral" onclick="showScreen('screen-student-login')">🙋 Mulai Kuis (Murid)</button>
+      <button class="btn sky" onclick="showScreen('screen-admin-login')">🔐 Login Guru / Admin</button>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="margin:0 0 8px; color:var(--grape);">Tentang Kuis Ini</h3>
+      <p style="margin:0; font-size:14px; line-height:1.6; color:#6a6285;">Ada 10 soal seru tentang permainan tradisional <b>Lompat Tali</b>, dengan berbagai jenis: pilihan ganda, benar/salah, menjodohkan, dan mengurutkan. Setiap soal punya waktu, jadi ayo fokus dan semangat menjawab! 🎉</p>
+    </div>
+    <footer class="credit">Dibuat untuk SD Negeri-1 Sidorejo · Pangkalan Bun</footer>
+  </div>
+</section>
+
+<!-- ============ STUDENT LOGIN ============ -->
+<section id="screen-student-login" class="screen">
+  <div class="wrap">
+    <button class="back-link" onclick="showScreen('screen-home')">← Kembali</button>
+    <div class="card">
+      <h2 style="margin:0 0 4px; color:var(--grape);">Siapa Namamu? 😊</h2>
+      <p style="margin:0 0 6px; color:#6a6285; font-size:14px;">Tulis namamu untuk mulai bermain sambil belajar!</p>
+      <label>Nama Lengkap</label>
+      <input type="text" id="inputNama" placeholder="Contoh: Siti Aminah">
+      <label>Kelas</label>
+      <select id="inputKelas">
+        <option>3A</option><option>3B</option><option>3C</option><option>Lainnya</option>
+      </select>
+      <button class="btn primary" style="margin-top:18px;" onclick="startQuizFlow()">🚀 Mulai Kuis</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ADMIN LOGIN ============ -->
+<section id="screen-admin-login" class="screen">
+  <div class="wrap">
+    <button class="back-link" onclick="showScreen('screen-home')">← Kembali</button>
+    <div class="card">
+      <h2 style="margin:0 0 4px; color:var(--grape);">Login Guru / Admin</h2>
+      <p style="margin:0 0 6px; color:#6a6285; font-size:14px;">Khusus Pak Surya / guru untuk mengatur soal dan kuis.</p>
+      <label>Username</label>
+      <input type="text" id="adminUser" placeholder="admin">
+      <label>Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••">
+      <p id="adminLoginError" style="color:var(--coral); font-weight:800; font-size:13px; display:none;">Username atau password salah.</p>
+      <button class="btn grass" style="margin-top:12px;" onclick="doAdminLogin()">Masuk</button>
+      <p class="hint">Default: username <b>admin</b>, password <b>guru123</b>. Ganti password setelah login di menu Pengaturan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="screen-quiz" class="screen">
+  <div class="wrap">
+    <div class="quiz-top">
+      <div class="pill">Soal <span id="qIndexLabel">1</span>/<span id="qTotalLabel">10</span></div>
+      <div class="pill timer-pill" id="timerPill">⏱ <span id="timerLabel">30</span>s</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:10%"></div></div>
+
+    <div class="card" style="margin-top:14px;">
+      <span class="type-tag" id="typeTag">Pilihan Ganda</span>
+      <br>
+      <button class="speak-btn" onclick="speakCurrentQuestion()">🔊 Dengarkan Soal</button>
+      <div class="q-text" id="qText">Teks soal...</div>
+      <div id="answerArea"></div>
+      <button class="btn primary" id="submitBtn" style="margin-top:16px; display:none;" onclick="submitAnswer()">Jawab ✅</button>
+    </div>
+  </div>
+  <div class="feedback-banner" id="feedbackBanner">Benar!</div>
+</section>
+
+<!-- ============ RESULT ============ -->
+<section id="screen-result" class="screen">
+  <div class="wrap" style="text-align:center;">
+    <div class="card">
+      <h2 style="margin:4px 0; color:var(--grape);">Kuis Selesai! 🎉</h2>
+      <div class="score-circle" id="scoreCircle" style="--pct:0;">
+        <div class="inner"><b id="scoreNum">0</b><span>NILAI</span></div>
+      </div>
+      <p id="resultSummary" style="font-weight:800; color:#6a6285;">Kamu menjawab 0 dari 10 benar</p>
+      <p id="resultMsg" style="font-weight:700; color:var(--coral); font-size:15px;"></p>
+      <p id="saveStatus" class="hint"></p>
+    </div>
+    <div class="menu-grid">
+      <button class="btn sun" onclick="showScreen('screen-ranking'); renderRanking();">🏆 Lihat Ranking</button>
+      <button class="btn coral" onclick="restartToHome()">🏠 Kembali ke Beranda</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RANKING ============ -->
+<section id="screen-ranking" class="screen">
+  <div class="wrap">
+    <button class="back-link" onclick="showScreen('screen-home')">← Kembali</button>
+    <h2 style="color:var(--grape); margin:0 0 4px;">🏆 Papan Ranking</h2>
+    <p style="color:#6a6285; margin:0 0 16px; font-size:14px;">Skor terbaik dari semua murid yang sudah bermain.</p>
+    <div id="rankingList"></div>
+  </div>
+</section>
+
+<!-- ============ ADMIN PANEL ============ -->
+<section id="screen-admin" class="screen">
+  <div class="wrap">
+    <button class="back-link" onclick="logoutAdmin()">← Keluar dari Admin</button>
+    <h2 style="color:var(--grape); margin:0 0 12px;">Panel Guru / Admin</h2>
+    <div class="tab-row">
+      <button class="tab-btn active" id="tabSoalBtn" onclick="switchAdminTab('soal')">📝 Soal</button>
+      <button class="tab-btn" id="tabSettingBtn" onclick="switchAdminTab('setting')">⚙️ Pengaturan</button>
+      <button class="tab-btn" id="tabRankBtn" onclick="switchAdminTab('rank')">🏆 Hasil</button>
+    </div>
+
+    <div id="tabSoal">
+      <button class="btn grass" onclick="openQuestionModal(null)">➕ Tambah Soal Baru</button>
+      <div id="adminQuestionList" style="margin-top:14px;"></div>
+    </div>
+
+    <div id="tabSetting" style="display:none;">
+      <div class="card">
+        <div class="toggle-row">
+          <div><b>Acak Urutan Soal</b><div class="hint" style="margin:2px 0 0;">Soal ditampilkan dengan urutan acak tiap murid.</div></div>
+          <div class="switch" id="switchShuffleQ" onclick="toggleSetting('shuffleQuestions', this)"><div class="knob"></div></div>
+        </div>
+        <div class="toggle-row">
+          <div><b>Acak Pilihan Jawaban</b><div class="hint" style="margin:2px 0 0;">Urutan pilihan/opsi diacak tiap murid.</div></div>
+          <div class="switch" id="switchShuffleA" onclick="toggleSetting('shuffleAnswers', this)"><div class="knob"></div></div>
+        </div>
+        <label>Waktu per Soal (detik)</label>
+        <input type="number" id="timePerQuestion" min="10" max="180" value="30" onchange="updateTimeSetting(this.value)">
+        <label>URL Google Apps Script (simpan hasil ke Google Sheet)</label>
+        <input type="text" id="sheetUrlInput" placeholder="https://script.google.com/macros/s/xxxxx/exec" onchange="updateSheetUrl(this.value)">
+        <p class="hint">Tempel URL Web App dari Google Apps Script di sini agar hasil kuis murid otomatis tersimpan ke Google Sheet. Lihat petunjuk pembuatan di bagian bawah panel ini. Jika dikosongkan, hasil tetap tersimpan di perangkat ini (localStorage).</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px;">Ganti Password Admin</h3>
+        <label>Username Baru</label>
+        <input type="text" id="newAdminUser" placeholder="admin">
+        <label>Password Baru</label>
+        <input type="password" id="newAdminPass" placeholder="Password baru">
+        <button class="btn sky" style="margin-top:14px;" onclick="changeAdminCreds()">Simpan Perubahan</button>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 8px;">📄 Cara Menghubungkan Google Sheet</h3>
+        <ol style="font-size:13px; color:#6a6285; line-height:1.7; padding-left:18px;">
+          <li>Buat Google Sheet baru, lalu buka menu <b>Extensions → Apps Script</b>.</li>
+          <li>Hapus kode default, tempel kode Apps Script yang menerima data POST (nama, kelas, skor, total, tanggal) dan menuliskannya ke baris baru sheet.</li>
+          <li>Klik <b>Deploy → New deployment</b>, pilih tipe <b>Web app</b>, akses "Anyone".</li>
+          <li>Salin URL Web App yang muncul, tempel ke kolom URL di atas.</li>
+        </ol>
+      </div>
+      <div class="card" style="background:#FFF3E0;">
+        <button class="btn coral" onclick="resetAllData()">🗑️ Reset Semua Data (Soal &amp; Hasil)</button>
+      </div>
+    </div>
+
+    <div id="tabRank" style="display:none;">
+      <div id="adminRankingList"></div>
+      <button class="btn coral" style="margin-top:6px;" onclick="clearResults()">🗑️ Hapus Semua Hasil</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUESTION EDIT MODAL ============ -->
+<div class="modal-bg" id="qModalBg">
+  <div class="modal">
+    <h3 style="margin:0 0 12px; color:var(--grape);" id="qModalTitle">Tambah Soal</h3>
+    <label>Jenis Soal</label>
+    <select id="mType" onchange="renderModalTypeFields()">
+      <option value="mc">Pilihan Ganda</option>
+      <option value="tf">Benar / Salah</option>
+      <option value="match">Menjodohkan</option>
+      <option value="order">Mengurutkan</option>
+    </select>
+    <label>Teks Soal</label>
+    <input type="text" id="mText" placeholder="Tulis pertanyaan di sini">
+    <div id="mFields"></div>
+    <div style="display:flex; gap:10px; margin-top:18px;">
+      <button class="btn ghost" onclick="closeQuestionModal()">Batal</button>
+      <button class="btn primary" onclick="saveQuestionModal()">Simpan Soal</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA DEFAULT
+============================================================ */
+const DEFAULT_QUESTIONS = [
+  {id:1, type:'mc', text:'Alat utama yang digunakan dalam permainan lompat tali tradisional biasanya terbuat dari...', options:['Karet gelang yang dianyam','Besi tipis','Kayu panjang','Plastik keras'], answer:0, time:30},
+  {id:2, type:'tf', text:'Lompat tali termasuk salah satu permainan tradisional asli Indonesia.', answer:true, time:20},
+  {id:3, type:'mc', text:'Di beberapa daerah, permainan lompat tali juga dikenal dengan nama lain, yaitu...', options:['Yeye','Gobak Sodor','Engklek','Congklak'], answer:0, time:25},
+  {id:4, type:'tf', text:'Lompat tali hanya bisa dimainkan sendirian tanpa teman.', answer:false, time:20},
+  {id:5, type:'mc', text:'Manfaat bermain lompat tali bagi tubuh kita adalah...', options:['Melatih kekuatan otot dan kelincahan','Membuat badan lemas','Merusak penglihatan','Tidak ada manfaatnya'], answer:0, time:25},
+  {id:6, type:'match', text:'Jodohkan istilah dalam permainan lompat tali dengan artinya!', pairs:[
+      {left:'Tali karet', right:'Alat utama permainan'},
+      {left:'Pemegang tali', right:'Orang yang mengayun tali'},
+      {left:'Pelompat', right:'Orang yang melompati tali'},
+      {left:'Yeye', right:'Nama lain lompat tali'}
+    ], time:60},
+  {id:7, type:'order', text:'Urutkan langkah-langkah bermain lompat tali yang benar dari awal!', items:[
+      'Menyiapkan tali karet',
+      'Menentukan siapa yang memegang tali',
+      'Mengayunkan tali secara berirama',
+      'Melompati tali sesuai irama ayunan'
+    ], time:60},
+  {id:8, type:'mc', text:'Lompat tali sebaiknya dimainkan di tempat yang...', options:['Luas dan aman','Sempit dan becek','Dekat jalan raya','Di dalam kolam renang'], answer:0, time:25},
+  {id:9, type:'tf', text:'Sebelum bermain lompat tali, sebaiknya kita melakukan pemanasan terlebih dahulu.', answer:true, time:20},
+  {id:10, type:'mc', text:'Jika kaki pemain tersangkut tali saat melompat, maka pemain tersebut dianggap...', options:['Gugur / keluar dari permainan','Menang','Mendapat nilai tambah','Mengulang dari awal permainan'], answer:0, time:25}
+];
+const DEFAULT_SETTINGS = { shuffleQuestions:true, shuffleAnswers:true, timePerQuestion:30, sheetUrl:'', adminUser:'admin', adminPass:'guru123' };
+
+function loadData(){
+  if(!localStorage.getItem('lt_questions')) localStorage.setItem('lt_questions', JSON.stringify(DEFAULT_QUESTIONS));
+  if(!localStorage.getItem('lt_settings')) localStorage.setItem('lt_settings', JSON.stringify(DEFAULT_SETTINGS));
+  if(!localStorage.getItem('lt_results')) localStorage.setItem('lt_results', JSON.stringify([]));
+}
+function getQuestions(){ return JSON.parse(localStorage.getItem('lt_questions')||'[]'); }
+function setQuestions(q){ localStorage.setItem('lt_questions', JSON.stringify(q)); }
+function getSettings(){ return JSON.parse(localStorage.getItem('lt_settings')||'{}'); }
+function setSettings(s){ localStorage.setItem('lt_settings', JSON.stringify(s)); }
+function getResults(){ return JSON.parse(localStorage.getItem('lt_results')||'[]'); }
+function setResults(r){ localStorage.setItem('lt_results', JSON.stringify(r)); }
+loadData();
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+/* ============================================================
+   AUDIO: suara & efek bunyi (Web Speech + Web Audio, tanpa file eksternal)
+============================================================ */
+let audioCtx;
+function ensureAudioCtx(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function playTone(kind){
+  try{
+    const ctx = ensureAudioCtx();
+    const now = ctx.currentTime;
+    const notes = kind==='correct' ? [523.25,659.25,783.99] : [220,180];
+    notes.forEach((f,i)=>{
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0.001, now+i*0.11);
+      gain.gain.exponentialRampToValueAtTime(0.18, now+i*0.11+0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now+i*0.11+0.22);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now+i*0.11);
+      osc.stop(now+i*0.11+0.24);
+    });
+  }catch(e){}
+}
+function speak(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    const idVoice = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith('id'));
+    if(idVoice) utter.voice = idVoice;
+    utter.lang = 'id-ID';
+    utter.rate = 0.95;
+    utter.pitch = 1.05;
+    window.speechSynthesis.speak(utter);
+  }catch(e){}
+}
+function speakCurrentQuestion(){
+  let t = quizState.questions[quizState.idx].text;
+  if(quizState.questions[quizState.idx].type==='tf') t += ' Jawabannya benar atau salah?';
+  speak(t);
+}
+
+/* ============================================================
+   STUDENT LOGIN & QUIZ FLOW
+============================================================ */
+let currentStudent = null;
+function startQuizFlow(){
+  const nama = document.getElementById('inputNama').value.trim();
+  const kelas = document.getElementById('inputKelas').value;
+  if(!nama){ alert('Tulis namamu dulu ya! 😊'); return; }
+  currentStudent = {name:nama, kelas:kelas};
+  speak('Halo ' + nama + '! Selamat mengerjakan kuis lompat tali tradisional.');
+  buildQuiz();
+  showScreen('screen-quiz');
+}
+
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+let quizState = { questions:[], idx:0, score:0, answered:false, timer:null, timeLeft:30, matchSel:null, matchPairs:[], orderArr:[] };
+
+function buildQuiz(){
+  const settings = getSettings();
+  let qs = JSON.parse(JSON.stringify(getQuestions()));
+  if(settings.shuffleQuestions) qs = shuffleArr(qs);
+  qs.forEach(q=>{
+    if(q.type==='mc' && settings.shuffleAnswers){
+      const correctVal = q.options[q.answer];
+      const opts = shuffleArr(q.options);
+      q.options = opts;
+      q.answer = opts.indexOf(correctVal);
+    }
+  });
+  quizState = { questions:qs, idx:0, score:0, answered:false, timer:null, timeLeft:30, matchSel:null, matchPairs:[], orderArr:[] };
+  document.getElementById('qTotalLabel').textContent = qs.length;
+  renderQuestion();
+}
+
+function currentTimeLimit(){
+  const settings = getSettings();
+  const q = quizState.questions[quizState.idx];
+  return (q.time) || settings.timePerQuestion || 30;
+}
+
+function renderQuestion(){
+  quizState.answered = false;
+  quizState.matchSel = null;
+  quizState.matchPairs = [];
+  const q = quizState.questions[quizState.idx];
+  document.getElementById('qIndexLabel').textContent = quizState.idx+1;
+  document.getElementById('progressFill').style.width = Math.round(((quizState.idx)/quizState.questions.length)*100) + '%';
+  const tagMap = {mc:['Pilihan Ganda','mc'], tf:['Benar / Salah','tf'], match:['Menjodohkan','match'], order:['Mengurutkan','order']};
+  const tag = document.getElementById('typeTag');
+  tag.textContent = tagMap[q.type][0];
+  tag.className = 'type-tag ' + tagMap[q.type][1];
+  document.getElementById('qText').textContent = q.text;
+  const submitBtnEl = document.getElementById('submitBtn');
+  submitBtnEl.style.display = (q.type==='match'||q.type==='order') ? 'flex' : 'none';
+  submitBtnEl.disabled = false; // reset agar soal berikutnya bisa dijawab
+
+  const area = document.getElementById('answerArea');
+  area.innerHTML = '';
+
+  if(q.type==='mc'){
+    const list = document.createElement('div'); list.className='opt-list';
+    q.options.forEach((opt,i)=>{
+      const b = document.createElement('button');
+      b.className='opt'; b.innerHTML = `<span class="bullet">${String.fromCharCode(65+i)}</span><span>${opt}</span>`;
+      b.onclick = ()=>answerMC(i,b);
+      list.appendChild(b);
+    });
+    area.appendChild(list);
+  }
+  else if(q.type==='tf'){
+    const row = document.createElement('div'); row.className='tf-row';
+    const bTrue = document.createElement('button'); bTrue.className='opt'; bTrue.textContent='✅ BENAR'; bTrue.onclick=()=>answerTF(true,bTrue);
+    const bFalse = document.createElement('button'); bFalse.className='opt'; bFalse.textContent='❌ SALAH'; bFalse.onclick=()=>answerTF(false,bFalse);
+    row.appendChild(bTrue); row.appendChild(bFalse);
+    area.appendChild(row);
+  }
+  else if(q.type==='match'){
+    const rightsShuffled = shuffleArr(q.pairs.map(p=>p.right));
+    const grid = document.createElement('div'); grid.className='match-grid';
+    const colL = document.createElement('div'); colL.innerHTML = '<h4>Istilah</h4>';
+    const colR = document.createElement('div'); colR.innerHTML = '<h4>Arti</h4>';
+    q.pairs.forEach((p,i)=>{
+      const el = document.createElement('div'); el.className='match-item'; el.textContent=p.left;
+      el.dataset.left = p.left;
+      el.onclick=()=>selectMatchLeft(el, p.left);
+      colL.appendChild(el);
+    });
+    rightsShuffled.forEach(r=>{
+      const el = document.createElement('div'); el.className='match-item'; el.textContent=r;
+      el.dataset.right = r;
+      el.onclick=()=>selectMatchRight(el, r);
+      colR.appendChild(el);
+    });
+    grid.appendChild(colL); grid.appendChild(colR);
+    area.appendChild(grid);
+  }
+  else if(q.type==='order'){
+    quizState.orderArr = shuffleArr(q.items);
+    renderOrderList();
+  }
+  startTimer();
+}
+
+function renderOrderList(){
+  const area = document.getElementById('answerArea');
+  let list = document.getElementById('orderListEl');
+  area.querySelectorAll('.order-list').forEach(e=>e.remove());
+  list = document.createElement('div'); list.className='order-list'; list.id='orderListEl';
+  quizState.orderArr.forEach((txt,i)=>{
+    const row = document.createElement('div'); row.className='order-item';
+    row.innerHTML = `<div class="num">${i+1}</div><div class="txt">${txt}</div>
+      <div class="arrows">
+        <button onclick="moveOrder(${i},-1)">↑</button>
+        <button onclick="moveOrder(${i},1)">↓</button>
+      </div>`;
+    list.appendChild(row);
+  });
+  area.appendChild(list);
+}
+function moveOrder(i,dir){
+  if(quizState.answered) return;
+  const j = i+dir;
+  if(j<0 || j>=quizState.orderArr.length) return;
+  [quizState.orderArr[i], quizState.orderArr[j]] = [quizState.orderArr[j], quizState.orderArr[i]];
+  renderOrderList();
+}
+
+function selectMatchLeft(el, leftVal){
+  if(quizState.answered) return;
+  if(quizState.matchPairs.find(p=>p.left===leftVal)) return;
+  document.querySelectorAll('.match-item[data-left]').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  quizState.matchSel = leftVal;
+}
+function selectMatchRight(el, rightVal){
+  if(quizState.answered) return;
+  if(!quizState.matchSel) return;
+  if(quizState.matchPairs.find(p=>p.right===rightVal)) return;
+  quizState.matchPairs.push({left:quizState.matchSel, right:rightVal});
+  document.querySelectorAll('.match-item[data-left]').forEach(e=>{
+    if(e.dataset.left===quizState.matchSel){ e.classList.remove('active'); e.classList.add('paired'); }
+  });
+  el.classList.add('paired');
+  quizState.matchSel = null;
+}
+
+function answerMC(i, btn){
+  if(quizState.answered) return;
+  quizState.answered = true;
+  clearInterval(quizState.timer);
+  const q = quizState.questions[quizState.idx];
+  const correct = i===q.answer;
+  document.querySelectorAll('#answerArea .opt').forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx===q.answer) b.classList.add('correct');
+    else if(idx===i) b.classList.add('wrong');
+  });
+  finishAnswer(correct);
+}
+function answerTF(val, btn){
+  if(quizState.answered) return;
+  quizState.answered = true;
+  clearInterval(quizState.timer);
+  const q = quizState.questions[quizState.idx];
+  const correct = val===q.answer;
+  document.querySelectorAll('#answerArea .opt').forEach(b=>{
+    b.disabled = true;
+    const isTrueBtn = b.textContent.includes('BENAR');
+    if((isTrueBtn && q.answer===true) || (!isTrueBtn && q.answer===false)) b.classList.add('correct');
+  });
+  if(!correct) btn.classList.add('wrong');
+  finishAnswer(correct);
+}
+
+function submitAnswer(){
+  if(quizState.answered) return;
+  const q = quizState.questions[quizState.idx];
+  let correct = false;
+  if(q.type==='match'){
+    if(quizState.matchPairs.length < q.pairs.length){ alert('Pasangkan semua istilah dulu ya!'); return; }
+    correct = q.pairs.every(p => quizState.matchPairs.find(mp=>mp.left===p.left && mp.right===p.right));
+    document.querySelectorAll('.match-item[data-right]').forEach(el=>{
+      const rightVal = el.dataset.right;
+      const chosen = quizState.matchPairs.find(mp=>mp.right===rightVal);
+      if(chosen){
+        const correctPair = q.pairs.find(p=>p.left===chosen.left);
+        el.classList.add(correctPair && correctPair.right===rightVal ? 'paired' : 'wrongpair');
+      }
+    });
+  } else if(q.type==='order'){
+    correct = JSON.stringify(quizState.orderArr) === JSON.stringify(q.items);
+  }
+  quizState.answered = true;
+  clearInterval(quizState.timer);
+  document.getElementById('submitBtn').disabled = true;
+  finishAnswer(correct);
+}
+
+function timeUp(){
+  if(quizState.answered) return;
+  quizState.answered = true;
+  clearInterval(quizState.timer);
+  document.querySelectorAll('#answerArea button').forEach(b=>b.disabled = true);
+  finishAnswer(false, true);
+}
+
+function finishAnswer(correct, isTimeUp){
+  if(correct) quizState.score++;
+  playTone(correct ? 'correct' : 'wrong');
+  const banner = document.getElementById('feedbackBanner');
+  banner.className = 'feedback-banner show ' + (correct?'ok':'bad');
+  banner.textContent = isTimeUp ? '⏰ Waktu habis!' : (correct ? '🎉 Benar sekali! Hebat!' : '😅 Belum tepat, semangat!');
+  speak(correct ? 'Jawaban benar, hebat!' : 'Jawaban belum tepat, semangat ya!');
+  setTimeout(()=>{
+    banner.classList.remove('show');
+    setTimeout(()=>{
+      quizState.idx++;
+      if(quizState.idx >= quizState.questions.length){ finishQuiz(); }
+      else { renderQuestion(); }
+    }, 200);
+  }, 1300);
+}
+
+function startTimer(){
+  clearInterval(quizState.timer);
+  quizState.timeLeft = currentTimeLimit();
+  const label = document.getElementById('timerLabel');
+  const pill = document.getElementById('timerPill');
+  pill.classList.remove('low');
+  label.textContent = quizState.timeLeft;
+  quizState.timer = setInterval(()=>{
+    quizState.timeLeft--;
+    label.textContent = quizState.timeLeft;
+    if(quizState.timeLeft<=5) pill.classList.add('low');
+    if(quizState.timeLeft<=0){ timeUp(); }
+  },1000);
+}
+
+function finishQuiz(){
+  const total = quizState.questions.length;
+  const score = quizState.score;
+  const pct = Math.round((score/total)*100);
+  document.getElementById('scoreCircle').style.setProperty('--pct', pct);
+  document.getElementById('scoreNum').textContent = pct;
+  document.getElementById('resultSummary').textContent = `Kamu menjawab ${score} dari ${total} soal dengan benar`;
+  const msgEl = document.getElementById('resultMsg');
+  let msg = '';
+  if(pct>=90) msg='🌟 Luar biasa! Kamu jago sekali!';
+  else if(pct>=70) msg='👏 Bagus sekali, terus belajar ya!';
+  else if(pct>=50) msg='💪 Lumayan! Ayo belajar lagi supaya lebih hebat!';
+  else msg='📚 Yuk belajar lagi tentang Lompat Tali Tradisional!';
+  msgEl.textContent = msg;
+  speak('Kuis selesai! Nilai kamu ' + pct + '. ' + msg);
+
+  const result = { name: currentStudent ? currentStudent.name : 'Tanpa Nama', kelas: currentStudent? currentStudent.kelas : '-', score:score, total:total, pct:pct, date: new Date().toISOString() };
+  const results = getResults(); results.push(result); setResults(results);
+
+  const settings = getSettings();
+  const statusEl = document.getElementById('saveStatus');
+  statusEl.textContent = 'Hasil tersimpan di perangkat ini.';
+  if(settings.sheetUrl){
+    statusEl.textContent = 'Menyimpan hasil ke Google Sheet...';
+    fetch(settings.sheetUrl, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
+      body: JSON.stringify(result)
+    }).then(()=>{ statusEl.textContent = 'Hasil tersimpan di perangkat & dikirim ke Google Sheet.'; })
+      .catch(()=>{ statusEl.textContent = 'Hasil tersimpan di perangkat ini (gagal mengirim ke Google Sheet).'; });
+  }
+  showScreen('screen-result');
+}
+
+function restartToHome(){
+  document.getElementById('inputNama').value='';
+  showScreen('screen-home');
+}
+
+/* ============================================================
+   RANKING
+============================================================ */
+function renderRanking(){
+  const results = getResults().slice().sort((a,b)=> b.pct - a.pct || new Date(b.date)-new Date(a.date));
+  const list = document.getElementById('rankingList');
+  list.innerHTML = '';
+  if(results.length===0){
+    list.innerHTML = '<div class="card" style="text-align:center; color:#8a83a8;">Belum ada hasil kuis. Ayo jadi yang pertama! 🎉</div>';
+    return;
+  }
+  const medals = ['#FFD23F','#C6C9D6','#E0A45C'];
+  results.slice(0,50).forEach((r,i)=>{
+    const row = document.createElement('div'); row.className='rank-row';
+    const medalBg = i<3 ? medals[i] : '#EFE9FF';
+    const medalColor = i<3 ? '#5A4200' : 'var(--grape)';
+    row.innerHTML = `<div class="medal" style="background:${medalBg}; color:${medalColor};">${i<3? ['🥇','🥈','🥉'][i] : (i+1)}</div>
+      <div><div class="name">${escapeHtml(r.name)}</div><div class="sub">Kelas ${escapeHtml(r.kelas)} · ${new Date(r.date).toLocaleDateString('id-ID')}</div></div>
+      <div style="margin-left:auto;" class="score">${r.pct}</div>`;
+    list.appendChild(row);
+  });
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ============================================================
+   ADMIN LOGIN & PANEL
+============================================================ */
+function doAdminLogin(){
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  const s = getSettings();
+  if(u===s.adminUser && p===s.adminPass){
+    document.getElementById('adminLoginError').style.display='none';
+    document.getElementById('adminUser').value=''; document.getElementById('adminPass').value='';
+    openAdminPanel();
+  } else {
+    document.getElementById('adminLoginError').style.display='block';
+  }
+}
+function logoutAdmin(){ showScreen('screen-home'); }
+function openAdminPanel(){
+  loadSettingsToUI();
+  renderAdminQuestions();
+  switchAdminTab('soal');
+  showScreen('screen-admin');
+}
+function loadSettingsToUI(){
+  const s = getSettings();
+  document.getElementById('switchShuffleQ').classList.toggle('on', !!s.shuffleQuestions);
+  document.getElementById('switchShuffleA').classList.toggle('on', !!s.shuffleAnswers);
+  document.getElementById('timePerQuestion').value = s.timePerQuestion || 30;
+  document.getElementById('sheetUrlInput').value = s.sheetUrl || '';
+}
+function switchAdminTab(tab){
+  document.getElementById('tabSoal').style.display = tab==='soal' ? 'block':'none';
+  document.getElementById('tabSetting').style.display = tab==='setting' ? 'block':'none';
+  document.getElementById('tabRank').style.display = tab==='rank' ? 'block':'none';
+  document.getElementById('tabSoalBtn').classList.toggle('active', tab==='soal');
+  document.getElementById('tabSettingBtn').classList.toggle('active', tab==='setting');
+  document.getElementById('tabRankBtn').classList.toggle('active', tab==='rank');
+  if(tab==='rank') renderAdminRanking();
+}
+function toggleSetting(key, el){
+  const s = getSettings();
+  s[key] = !s[key];
+  setSettings(s);
+  el.classList.toggle('on', s[key]);
+}
+function updateTimeSetting(v){ const s=getSettings(); s.timePerQuestion = parseInt(v)||30; setSettings(s); }
+function updateSheetUrl(v){ const s=getSettings(); s.sheetUrl = v.trim(); setSettings(s); }
+function changeAdminCreds(){
+  const u = document.getElementById('newAdminUser').value.trim();
+  const p = document.getElementById('newAdminPass').value;
+  if(!u || !p){ alert('Isi username dan password baru.'); return; }
+  const s = getSettings(); s.adminUser=u; s.adminPass=p; setSettings(s);
+  document.getElementById('newAdminUser').value=''; document.getElementById('newAdminPass').value='';
+  alert('Username & password admin berhasil diubah.');
+}
+function resetAllData(){
+  if(!confirm('Yakin ingin mengembalikan semua soal ke default dan menghapus semua hasil kuis?')) return;
+  localStorage.removeItem('lt_questions'); localStorage.removeItem('lt_results');
+  loadData(); renderAdminQuestions(); alert('Data berhasil direset.');
+}
+function clearResults(){
+  if(!confirm('Hapus semua hasil kuis murid?')) return;
+  setResults([]); renderAdminRanking();
+}
+function renderAdminRanking(){
+  const results = getResults().slice().sort((a,b)=> b.pct - a.pct || new Date(b.date)-new Date(a.date));
+  const el = document.getElementById('adminRankingList');
+  el.innerHTML = '';
+  if(results.length===0){ el.innerHTML = '<div class="card" style="text-align:center; color:#8a83a8;">Belum ada hasil.</div>'; return; }
+  results.forEach((r,i)=>{
+    const row = document.createElement('div'); row.className='rank-row';
+    row.innerHTML = `<div class="medal" style="background:#EFE9FF; color:var(--grape);">${i+1}</div>
+      <div><div class="name">${escapeHtml(r.name)}</div><div class="sub">Kelas ${escapeHtml(r.kelas)} · ${new Date(r.date).toLocaleString('id-ID')}</div></div>
+      <div style="margin-left:auto;" class="score">${r.score}/${r.total}</div>`;
+    el.appendChild(row);
+  });
+}
+
+/* ----- Admin: kelola soal ----- */
+const typeLabel = {mc:'Pilihan Ganda', tf:'Benar/Salah', match:'Menjodohkan', order:'Mengurutkan'};
+function renderAdminQuestions(){
+  const qs = getQuestions();
+  const list = document.getElementById('adminQuestionList');
+  list.innerHTML = '';
+  qs.forEach((q,i)=>{
+    const div = document.createElement('div'); div.className='admin-q';
+    div.innerHTML = `<div class="top">
+        <div><span class="type-tag ${q.type}">${typeLabel[q.type]}</span><div style="font-weight:800; margin-top:4px;">${i+1}. ${escapeHtml(q.text)}</div></div>
+        <div class="actions">
+          <button class="icon-btn" onclick="openQuestionModal(${i})">✏️</button>
+          <button class="icon-btn danger" onclick="deleteQuestion(${i})">🗑️</button>
+        </div>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+function deleteQuestion(i){
+  if(!confirm('Hapus soal ini?')) return;
+  const qs = getQuestions(); qs.splice(i,1); setQuestions(qs); renderAdminQuestions();
+}
+
+let editingIndex = null;
+function openQuestionModal(i){
+  editingIndex = i;
+  document.getElementById('qModalTitle').textContent = i===null ? 'Tambah Soal Baru' : 'Edit Soal';
+  const q = i===null ? {type:'mc', text:'', options:['','','',''], answer:0, pairs:[{left:'',right:''},{left:'',right:''}], items:['',''], time:30} : JSON.parse(JSON.stringify(getQuestions()[i]));
+  document.getElementById('mType').value = q.type;
+  document.getElementById('mText').value = q.text;
+  renderModalTypeFields(q);
+  document.getElementById('qModalBg').classList.add('show');
+}
+function closeQuestionModal(){ document.getElementById('qModalBg').classList.remove('show'); }
+
+function renderModalTypeFields(existing){
+  const type = document.getElementById('mType').value;
+  const box = document.getElementById('mFields');
+  box.innerHTML='';
+  if(type==='mc'){
+    const opts = (existing && existing.options) || ['','','',''];
+    const ans = (existing && typeof existing.answer==='number') ? existing.answer : 0;
+    let html = '<label>Pilihan Jawaban (tandai lingkaran = jawaban benar)</label>';
+    opts.forEach((o,i)=>{
+      html += `<div class="opt-edit-row"><input type="radio" name="mcAns" value="${i}" ${i===ans?'checked':''}><input type="text" class="mcOptInput" value="${escapeAttr(o)}" placeholder="Pilihan ${i+1}"></div>`;
+    });
+    box.innerHTML = html;
+  } else if(type==='tf'){
+    const ans = existing ? existing.answer : true;
+    box.innerHTML = `<label>Jawaban Benar</label>
+      <div class="opt-edit-row"><input type="radio" name="tfAns" value="true" ${ans!==false?'checked':''}> Benar
+        &nbsp;&nbsp;<input type="radio" name="tfAns" value="false" ${ans===false?'checked':''}> Salah</div>`;
+  } else if(type==='match'){
+    const pairs = (existing && existing.pairs) || [{left:'',right:''},{left:'',right:''}];
+    let html = '<label>Pasangan Istilah & Arti</label><div id="matchPairsBox">';
+    pairs.forEach((p,i)=>{
+      html += `<div class="opt-edit-row"><input type="text" class="matchLeft" value="${escapeAttr(p.left)}" placeholder="Istilah"><input type="text" class="matchRight" value="${escapeAttr(p.right)}" placeholder="Arti"></div>`;
+    });
+    html += '</div><button class="btn small ghost" type="button" onclick="addMatchPairRow()">+ Tambah Pasangan</button>';
+    box.innerHTML = html;
+  } else if(type==='order'){
+    const items = (existing && existing.items) || ['',''];
+    let html = '<label>Langkah / Urutan yang Benar (dari atas ke bawah)</label><div id="orderItemsBox">';
+    items.forEach((it,i)=>{
+      html += `<div class="opt-edit-row"><input type="text" class="orderItemInput" value="${escapeAttr(it)}" placeholder="Langkah ${i+1}"></div>`;
+    });
+    html += '</div><button class="btn small ghost" type="button" onclick="addOrderItemRow()">+ Tambah Langkah</button>';
+    box.innerHTML = html;
+  }
+  const timeVal = existing && existing.time ? existing.time : 30;
+  box.innerHTML += `<label>Waktu Soal Ini (detik)</label><input type="number" id="mTime" min="10" max="180" value="${timeVal}">`;
+}
+function escapeAttr(s){ return String(s||'').replace(/"/g,'&quot;'); }
+function addMatchPairRow(){
+  const boxx = document.getElementById('matchPairsBox');
+  const div = document.createElement('div'); div.className='opt-edit-row';
+  div.innerHTML = `<input type="text" class="matchLeft" placeholder="Istilah"><input type="text" class="matchRight" placeholder="Arti">`;
+  boxx.appendChild(div);
+}
+function addOrderItemRow(){
+  const boxx = document.getElementById('orderItemsBox');
+  const div = document.createElement('div'); div.className='opt-edit-row';
+  div.innerHTML = `<input type="text" class="orderItemInput" placeholder="Langkah baru">`;
+  boxx.appendChild(div);
+}
+
+function saveQuestionModal(){
+  const type = document.getElementById('mType').value;
+  const text = document.getElementById('mText').value.trim();
+  if(!text){ alert('Teks soal wajib diisi.'); return; }
+  const time = parseInt(document.getElementById('mTime').value) || 30;
+  let q = {id: Date.now(), type, text, time};
+  if(type==='mc'){
+    const opts = Array.from(document.querySelectorAll('.mcOptInput')).map(i=>i.value.trim());
+    const ansRadio = document.querySelector('input[name=mcAns]:checked');
+    if(opts.some(o=>!o) || !ansRadio){ alert('Lengkapi semua pilihan dan tandai jawaban benar.'); return; }
+    q.options = opts; q.answer = parseInt(ansRadio.value);
+  } else if(type==='tf'){
+    const r = document.querySelector('input[name=tfAns]:checked');
+    q.answer = r.value==='true';
+  } else if(type==='match'){
+    const lefts = Array.from(document.querySelectorAll('.matchLeft')).map(i=>i.value.trim());
+    const rights = Array.from(document.querySelectorAll('.matchRight')).map(i=>i.value.trim());
+    if(lefts.some(l=>!l) || rights.some(r=>!r) || lefts.length<2){ alert('Lengkapi minimal 2 pasangan istilah & arti.'); return; }
+    q.pairs = lefts.map((l,i)=>({left:l, right:rights[i]}));
+  } else if(type==='order'){
+    const items = Array.from(document.querySelectorAll('.orderItemInput')).map(i=>i.value.trim());
+    if(items.some(it=>!it) || items.length<2){ alert('Lengkapi minimal 2 langkah urutan.'); return; }
+    q.items = items;
+  }
+  const qs = getQuestions();
+  if(editingIndex===null){ qs.push(q); } else { q.id = qs[editingIndex].id; qs[editingIndex] = q; }
+  setQuestions(qs);
+  closeQuestionModal();
+  renderAdminQuestions();
+}
+
+/* Preload TTS voices */
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = ()=>{ window.speechSynthesis.getVoices(); }; }
+</script>
+</body>
+</html>
